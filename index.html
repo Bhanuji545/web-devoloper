@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWEST - Designer Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg-dark: #1A1C20;
+            --secondary-bg-dark: #202228;
+            --text-light: #ECF0F1;
+            --accent-blue: #007bff; /* Similar to button/link color in image */
+            --accent-orange: #E67E22; /* If an orange accent is desired elsewhere */
+            --gradient-start: #0f1011;
+            --gradient-end: #1a1c20;
+            --progress-bar-bg: #33363D;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(to bottom, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll from subtle background patterns */
+        }
+
+        /* --- Global Styles --- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+        }
+
+        .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: darken(var(--accent-blue), 10%);
+            border-color: darken(var(--accent-blue), 10%);
+        }
+
+        .btn-outline-light {
+            border-color: var(--text-light);
+            color: var(--text-light);
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-light:hover {
+            background-color: var(--text-light);
+            color: var(--primary-bg-dark);
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--primary-bg-dark);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--text-light) !important;
+            margin-left: 20px;
+        }
+        .navbar-nav .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 600;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+            color: var(--accent-blue) !important;
+        }
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin-right: 20px;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            background-color: var(--secondary-bg-dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden; /* For the background patterns */
+        }
+        .hero-content {
+            z-index: 10;
+        }
+        .hero-social-icons a {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        .hero-social-icons a:hover {
+            color: var(--accent-blue);
+        }
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero p.lead {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+        .hero-img-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 100px; /* Adjust for navbar */
+        }
+        .hero-profile-img {
+            width: 100%;
+            max-width: 450px; /* Adjust size as needed */
+            height: auto;
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            object-fit: cover;
+        }
+
+        /* Pagination dots for hero section */
+        .hero-pagination {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+        .hero-pagination .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .hero-pagination .dot.active {
+            background-color: var(--text-light);
+        }
+        .hero-pagination .arrow {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        /* Background patterns (circles and squares) */
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .hero::before { /* Circles */
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-blue) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation: moveCircles 20s infinite alternate;
+        }
+        .hero::after { /* Squares */
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, var(--accent-orange), transparent);
+            bottom: -50px;
+            right: -50px;
+            animation: moveSquares 25s infinite alternate;
+            transform: rotate(45deg);
+        }
+
+        @keyframes moveCircles {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        @keyframes moveSquares {
+            0% { transform: translate(0, 0) rotate(45deg); }
+            100% { transform: translate(-30px, -30px) rotate(50deg); }
+        }
+
+        /* --- About Section --- */
+        #about {
+            background-color: var(--primary-bg-dark); /* Using primary dark for this section as per image */
+            padding-top: 120px; /* Adjusted padding to match image spacing */
+            padding-bottom: 80px;
+            position: relative;
+        }
+
+        .about-left-col {
+            padding-right: 50px;
+        }
+        .about-right-col {
+            padding-left: 50px;
+        }
+
+        .about-profile-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .skills-heading {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .progress-bar-container {
+            background-color: var(--progress-bar-bg);
+            border-radius: 5px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background-color: var(--accent-blue);
+            height: 100%;
+            width: 0%; /* Will be controlled by JS or inline style */
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        .about-text-block {
+            background-color: var(--secondary-bg-dark); /* Background for text block as in image */
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .about-text-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+        }
+        .about-text-block p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+        }
+        .about-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .about-details ul li {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .about-details ul li strong {
+            color: var(--text-light);
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        /* Generic Background patterns for sections */
+        .section-background-pattern {
+            position: absolute;
+            top: -50px; /* Adjust as needed */
+            width: 100%;
+            height: 100px; /* Height of the pattern strip */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 C25,0 75,20 100,10 L100,20 L0,20 Z" fill="%232C3E50"/></svg>'); /* Wavy pattern example */
+            background-repeat: repeat-x;
+            background-size: 100px 100px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        #about .section-background-pattern {
+             top: 0; /* Position the pattern at the very top of the about section */
+             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 C25,0 75,10 100,5 L100,10 L0,10 Z" fill="%232C3E50"/></svg>'); /* Wavy pattern from image */
+             background-color: transparent; /* Ensure pattern image is visible */
+             height: 50px; /* Adjust height for the top wave */
+             background-size: 200px 50px; /* Adjust size to make waves more prominent */
+             opacity: 0.2;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+        }
+
+        @media (max-width: 991px) {
+            #hero {
+                height: auto;
+                padding-top: 100px; /* Adjust for navbar */
+                padding-bottom: 50px;
+                text-align: center;
+            }
+            .hero-content {
+                margin-bottom: 50px;
+            }
+            .hero-img-container {
+                padding-top: 0;
+            }
+            .hero-profile-img {
+                max-width: 300px;
+            }
+            .hero-pagination {
+                position: static;
+                transform: translateX(0);
+                margin-top: 30px;
+            }
+
+            #about .row {
+                flex-direction: column-reverse; /* Put text above image on small screens */
+            }
+            .about-left-col, .about-right-col {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .about-profile-img {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero p.lead {
+                font-size: 1rem;
+            }
+            .btn-primary, .btn-outline-light {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .about-text-block {
+                padding: 30px 20px;
+            }
+            .about-text-block h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">NEWEST</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#hero">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero" class="d-flex">
+        <div class="container d-flex align-items-center">
+            <div class="row w-100">
+                <div class="col-lg-7 d-flex flex-column justify-content-center hero-content text-lg-start text-center">
+                    <div class="hero-social-icons mb-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                    <h1>I'm a Designer</h1>
+                    <p class="lead mx-auto mx-lg-0">
+                        I'm a Designer with extensive experience for over 3 years. My expertise is to create and design Websites, Apps, Mockups and many more...
+                    </p>
+                    <div class="d-flex justify-content-center justify-content-lg-start gap-3 mt-4">
+                        <a href="#" class="btn btn-primary">MY WORK</a>
+                        <a href="#" class="btn btn-outline-light">HIRE ME</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 d-lg-flex d-none align-items-center justify-content-center hero-img-container">
+                    <img src="https://via.placeholder.com/450x600/2C3E50/ECF0F1?text=Your+Profile+Image" class="hero-profile-img" alt="Designer Profile">
+                </div>
+            </div>
+        </div>
+        <div class="hero-pagination">
+            <span class="arrow"><i class="fas fa-arrow-left"></i></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="section-background-pattern"></div>
+        <div class="container position-relative z-index-2">
+            <div class="row align-items-center">
+                <div class="col-lg-6 about-left-col">
+                    <img src="https://via.placeholder.com/600x400/2C3E50/ECF0F1?text=About+Image" class="about-profile-img" alt="About Image">
+                    <h3 class="skills-heading">MY SKILLS</h3>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>PHOTOSHOP</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>ILLUSTRATOR</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-label">
+                            <span>GRAPHIC DESIGN</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 about-right-col">
+                    <div class="about-text-block">
+                        <h3>ABOUT ME</h3>
+                        <p>Hi! My name is Edrea Kennedy. I am a graphic designer, and I'm very passionate and dedicated to my work. With 20 years since as a professional graphic designer, I have acquired the skills and knowledge necessary to make your project a success. I enjoy every step of the design process, from discussion and collaboration to concept and execution, but find the most fun in seeing the finished product do everything for you that it was created to do.</p>
+                        <div class="about-details mt-4">
+                            <ul>
+                                <li><strong>Name:</strong> Edrea Kennedy</li>
+                                <li><strong>Phone:</strong> +903 8698 123</li>
+                                <li><strong>Email:</strong> hello@example.com</li>
+                                <li><strong>Twitter:</strong> @designuil8</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.iconify.design/iconify/2.0.0/iconify.min.js"></script>
+</body>
+</html>
